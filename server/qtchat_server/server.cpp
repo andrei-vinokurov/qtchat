@@ -4,7 +4,7 @@ server::server(boost::asio::io_service &service) : m_sock(new boost::asio::ip::t
 {
     boost::asio::ip::tcp::endpoint ep(boost::asio::ip::tcp::v4(), 2001); // listen on 2001
     boost::asio::ip::tcp::acceptor acc(service, ep);
-    std::cout << "constructor " << m_sock << std::endl;
+    //std::cout << "constructor " << m_sock << std::endl;
     acc.async_accept(*m_sock, boost::bind(&server::handle_accept, this, m_sock, boost::placeholders::_1));
     service.run();
 }
@@ -12,8 +12,9 @@ server::server(boost::asio::io_service &service) : m_sock(new boost::asio::ip::t
 void server::handle_accept(socket_ptr sock, const boost::system::error_code & err)
 {
     if (err) return;
+    m_str = "true";
     // at this point, you can read/write to the socket
-    std::cout << "Client connected" << std::endl;
+    //std::cout << "Client connected" << std::endl;
     //system("PAUSE");
 }
 

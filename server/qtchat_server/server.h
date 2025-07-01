@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/asio.hpp>
 #include <boost/bind/bind.hpp>
@@ -17,6 +18,7 @@ public:
     void handle_accept(socket_ptr sock, const boost::system::error_code & err);
     void on_read(char * ptr, const boost::system::error_code & err, std::size_t read_bytes);
     void myread();
+    std::string m_str = "false";
 };
 
 #endif // SERVER_H
