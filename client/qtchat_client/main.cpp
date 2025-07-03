@@ -1,16 +1,14 @@
 #include "mainwindow.h"
-#include <boost/asio.hpp>
+
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    boost::asio::io_service io_service;
-    boost::asio::ip::tcp::socket socket(io_service);
-    boost::asio::ip::tcp::endpoint endpoint;
-    boost::system::error_code ec;
-    socket.connect(endpoint, ec);
     QApplication a(argc, argv);
-    MainWindow w;
+    QWidget *parent;
+    boost::asio::io_service service;
+    socket_ptr client(new boost::asio::ip::tcp::socket(service));
+    MainWindow w(parent, client);
     w.show();
     return a.exec();
 }

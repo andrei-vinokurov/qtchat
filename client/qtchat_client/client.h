@@ -8,11 +8,13 @@
 #include <boost/asio.hpp>
 #include <boost/bind/bind.hpp>
 
+typedef boost::shared_ptr<boost::asio::ip::tcp::socket> socket_ptr;
+
 class client
 {
 public:
     client(boost::asio::io_service &service);
-    boost::asio::ip::tcp::socket m_sock;
+    socket_ptr m_sock;
     void connect_handler(const boost::system::error_code & ec);
     void on_write(char * ptr, const boost::system::error_code & err);
     void mywrite();

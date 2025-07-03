@@ -1,10 +1,10 @@
 #include "client.h"
 
 
-client::client(boost::asio::io_service &service) : m_sock(service)
+client::client(boost::asio::io_service &service) : m_sock(new boost::asio::ip::tcp::socket(service))
 {
     boost::asio::ip::tcp::endpoint ep( boost::asio::ip::address::from_string("127.0.0.1"), 2001);
-    m_sock.async_connect(ep, boost::bind(&client::connect_handler, this, boost::placeholders::_1));
+    m_sock->async_connect(ep, boost::bind(&client::connect_handler, this, boost::placeholders::_1));
     service.run();
 }
 
@@ -29,8 +29,8 @@ void client::mywrite()
     char * buff = new char[512];
     std::string str = "Andrei Vinokurov";
     for(int i = 0; i <= str.length(); i++) *(buff + i) = str[i];
-    m_sock.async_send(boost::asio::buffer(buff, 512), boost::bind(&client::on_write, this, buff, boost::placeholders::_1));
-    std::cout << buff << std::endl;
+    m_sock->async_send(boost::asio::buffer(buff, 512), boost::bind(&client::on_write, this, buff, boost::placeholders::_1));
+    //std::cout << buff << std::endl;
 }
 
 
