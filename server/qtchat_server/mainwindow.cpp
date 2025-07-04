@@ -2,15 +2,16 @@
 #include "./ui_mainwindow.h"
 
 
-MainWindow::MainWindow(QWidget *parent, socket_ptr server)
+MainWindow::MainWindow(QWidget *parent, std::shared_ptr<server> serv)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_server(server)
+    , m_server(serv)
 {
     ui->setupUi(this);
     //boost::asio::io_service service;
     //m_server(service);
     connect(ui->action, SIGNAL(triggered(bool)), this, SLOT(listen()));
+    //m_server->myread();
 }
 
 MainWindow::~MainWindow()

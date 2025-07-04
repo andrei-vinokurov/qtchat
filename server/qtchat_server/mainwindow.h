@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <memory>
 #include "server.h"
 
 QT_BEGIN_NAMESPACE
@@ -15,10 +16,10 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, socket_ptr server = nullptr);
+    MainWindow(QWidget *parent = nullptr, std::shared_ptr<server> serv = nullptr);
     ~MainWindow();
     //boost::asio::io_service m_service;
-    socket_ptr m_server;
+    std::shared_ptr<server> m_server;
 
 
 private:

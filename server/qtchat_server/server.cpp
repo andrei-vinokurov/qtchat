@@ -25,13 +25,13 @@ void server::on_read(char * ptr, const boost::system::error_code & err, std::siz
 
 void server::myread()
 {
-    std::cout << "myread " << m_sock << std::endl;
+    //std::cout << "myread " << m_sock << std::endl;
     char * buff = new char[512];
     m_sock->async_receive(boost::asio::buffer(buff, 512), boost::bind(&server::on_read, this, buff, boost::placeholders::_1, boost::placeholders::_2));
 
     for(int i = 0; i < 512; i++)
     {
-        if(*(buff + i) != '\0') std::cout << *(buff + i);
+        if(*(buff + i) != '\0') m_str2[i] = *(buff + i);
         else break;
     }
 }

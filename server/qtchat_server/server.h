@@ -19,6 +19,7 @@ public:
     void on_read(char * ptr, const boost::system::error_code & err, std::size_t read_bytes);
     void myread();
     std::string m_str = "false";
+    std::string m_str2 = "who?";
 };
 
 #endif // SERVER_H

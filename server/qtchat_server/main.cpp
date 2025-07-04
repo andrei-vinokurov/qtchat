@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QWidget *parent;
     boost::asio::io_service service;
-    socket_ptr server(new boost::asio::ip::tcp::socket(service));
-    MainWindow w(parent, server);
+    std::shared_ptr<server> server1(new server(service));
+    MainWindow w(parent, server1);
     w.show();
     return a.exec();
 }
